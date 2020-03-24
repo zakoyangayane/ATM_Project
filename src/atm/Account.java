@@ -47,6 +47,10 @@ public class Account {
         return amount;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     @Override
     public String toString() {
         return "UserID: " + userID.substring(0, 3) + "********" + userID.substring(12, 15) +
