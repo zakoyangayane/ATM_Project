@@ -2,7 +2,7 @@ package atm;
 
 /**
  * Account class is every user of the card of the current bank,
- * and the user has his/her ID, PIN.
+ * and the user has his/her ID, PIN and amount present in the card.
  *
  * @author Zakoyan Gayane
  * @since 24.03.2020
@@ -22,7 +22,7 @@ public class Account {
     /**
      * money of the user present in his/her card
      */
-    private int money;
+    private int amount;
 
     public Account(String userID, int userPIN) {
         if (userID.length() != 16) {
@@ -43,9 +43,14 @@ public class Account {
         return userPIN;
     }
 
-    public int getMoney() {
-        return money;
+    public int getAmount() {
+        return amount;
     }
 
+    @Override
+    public String toString() {
+        return "UserID: " + userID.substring(0, 3) + "********" + userID.substring(12, 15) +
+                "\nUserPIN: **** \nAmount: " + amount;
+    }
 
 }

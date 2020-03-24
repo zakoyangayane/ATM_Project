@@ -18,16 +18,29 @@ public class Bank {
     public String name;
 
     /**
+     * number of the ATMs that has the bank
+     */
+    public int numberOfATMs;
+
+    /**
      * all users list of the bank
      */
-    private List<Account> allAccountsOfBank = new ArrayList<>();
+    private static List<AccountHolder> allAccountUsersOfTheBank = new ArrayList<>();
 
-    public Bank(String name) {
+    public Bank(String name, int numberOfATMs) {
         this.name = name;
+        this.numberOfATMs = numberOfATMs;
     }
 
-    public List<Account> getAllAccountsOfBank() {
-        return allAccountsOfBank;
+    public static List<AccountHolder> getAllAccountUsersOfTheBank() {
+        return allAccountUsersOfTheBank;
     }
 
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "name='" + name + '\'' +
+                ", numberOfATMs=" + numberOfATMs +
+                '}';
+    }
 }
