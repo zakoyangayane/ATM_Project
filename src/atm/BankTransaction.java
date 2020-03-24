@@ -1,5 +1,13 @@
 package atm;
 
+/**
+ * Bank transaction class is used for the actions that the user can do with his/her account.
+ * They can see their history of the account, take amount from the card,
+ * transfer some money to another user or quit the account from the ATM.
+ *
+ * @author Zakoyan Gayane
+ * @since 25.03.2020
+ */
 public class BankTransaction {
 
     /**
