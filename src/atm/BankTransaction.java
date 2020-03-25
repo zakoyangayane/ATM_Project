@@ -20,30 +20,19 @@ public class BankTransaction implements Transactions {
      */
     private AccountHolder.Account currentAccount;
 
-    public BankTransaction(String myID, Integer myPIN) {
+    public BankTransaction(AccountHolder.Account account, Integer myPIN) {
 
-        /*
-          go through all banks accounts and see whether there exists such account with
-          the inputted ID and PIN, if there exists then the cars is successfully entered
-          to the ATM, otherwise, it tells that either the ID or PIN is invalid.
-         */
-        for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
-            AccountHolder.Account curAccount = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
+        /*checking whether the PIN is entered correctly*/
+        if (account.getUserPIN().equals(myPIN)) {
+            this.currentAccount = account;
+            System.out.println("Card entered successfully! " + '\u263A');
+            showActions();
+        }
 
-            /*if found such account, then continue with it, and stop the searching*/
-            if (curAccount.getUserID().equals(myID)
-                    && curAccount.getUserPIN().equals(myPIN)) {
-                this.currentAccount = curAccount;
-                System.out.println("Card entered successfully! " + '\u263A');
-                showActions();
-                break;
-            }
-
-            /*if not found the account than quit the card from the ATM*/
-            else if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
-                System.out.println("Not correct User ID or PIN");
-                quit();
-            }
+        /*if the PIN is incorrect, then the card is quited from the ATM*/
+        else {
+            System.out.println("Incorrect PIN");
+            quit();
         }
     }
 

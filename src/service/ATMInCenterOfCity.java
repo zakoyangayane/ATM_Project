@@ -1,12 +1,13 @@
 package service;
 
+import atm.AccountHolder;
 import atm.Bank;
 import atm.BankTransaction;
 
 public class ATMInCenterOfCity extends BankTransaction {
 
-    public ATMInCenterOfCity(String myID, int myPIN) {
-        super(myID, myPIN);
+    public ATMInCenterOfCity(AccountHolder.Account account, Integer myPIN) {
+        super(account, myPIN);
     }
 
     public static void main(String[] args) {
@@ -16,7 +17,7 @@ public class ATMInCenterOfCity extends BankTransaction {
         System.out.println(Bank.getAllAccountUsersOfTheBank());
         System.out.println();
         //first user enters card to ATM
-        BankTransaction bankTransactionOFFirstUser = new BankTransaction("1234564519806980",
+        BankTransaction bankTransactionOFFirstUser = new BankTransaction(MyBank.accountHolder1.getAccount(),
                 1123);
         //see how much money you have
         System.out.println("Left: " + bankTransactionOFFirstUser.getCurrentAccount().getAmount() +
@@ -32,10 +33,10 @@ public class ATMInCenterOfCity extends BankTransaction {
 
         System.out.println("\n\n");
         //enter another card to ATM
-        BankTransaction bankTransactionOfSecondUser = new BankTransaction("5496846465416545646",
+        BankTransaction bankTransactionOfSecondUser = new BankTransaction(MyBank.accountHolder2.getAccount(),
                 1212);
         //enter again (correctly)
-        bankTransactionOfSecondUser = new BankTransaction("7598714259803650", 4545);
+        bankTransactionOfSecondUser = new BankTransaction(MyBank.accountHolder2.getAccount(), 4545);
         System.out.println("Left: " + bankTransactionOfSecondUser.getCurrentAccount().getAmount() +
                 "$ in card");
         System.out.println(bankTransactionOfSecondUser.getCurrentAccount().getUserID() +
