@@ -8,9 +8,13 @@ public class MyBank {
     //creating a bank
     Bank myBank = new Bank("Armenia Bank", 15);
 
-    public static void main(String[] args) {
-        //create a user
-        AccountHolder accountHolder1 = new AccountHolder("Gayane", "Zakoyan", "03.05.2000",
+    //create users
+    static AccountHolder accountHolder1;
+    static AccountHolder accountHolder2;
+
+    public static void createAccounts() {
+        //define a user
+        accountHolder1 = new AccountHolder("Gayane", "Zakoyan", "03.05.2000",
                 "123456AAA", null);
 
         //create and attach account to the account holder
@@ -20,8 +24,8 @@ public class MyBank {
         accountHolder1.getAccount().setAmount(10000);
 
 
-        //create one more user
-        AccountHolder accountHolder2 = new AccountHolder("Mane", "Zakoyan", "18.09.2006",
+        //define one more user
+        accountHolder2 = new AccountHolder("Mane", "Zakoyan", "18.09.2006",
                 "789456JJJ", null);
 
         //create and attach account to the second accont holder

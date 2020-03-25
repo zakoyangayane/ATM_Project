@@ -25,6 +25,7 @@ public class BankTransaction implements Transactions {
             if (curAccount.getUserID().equals(myID)
                     && curAccount.getUserPIN() == myPIN) {
                 this.currentAccount = curAccount;
+                showActions();
             }
             if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
                 System.out.println("Not correct User ID or PIN");
@@ -33,6 +34,10 @@ public class BankTransaction implements Transactions {
         }
     }
 
+    /**
+     * when the user has entered valid ID and PIN, he can already see and
+     * choose what action he wants to complete
+     */
     @Override
     public void showActions() {
         System.out.println("Choose the action: ");
