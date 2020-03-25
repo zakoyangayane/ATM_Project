@@ -1,6 +1,7 @@
 package atm;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -17,24 +18,22 @@ public class BankTransaction implements Transactions {
     /**
      * account which has been entered to the ATM
      */
-    private AccountHolder.Account currentAccount = null;
+    private AccountHolder.Account currentAccount;
 
-    public BankTransaction(String myID, int myPIN) {
+    public BankTransaction(String myID, Integer myPIN) {
         for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
             AccountHolder.Account curAccount = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
             if (curAccount.getUserID().equals(myID)
-                    && curAccount.getUserPIN() == myPIN) {
+                    && curAccount.getUserPIN().equals(myPIN)) {
                 this.currentAccount = curAccount;
-                System.out.println("Card entered successfully! :)");
+                System.out.println("Card entered successfully! " + '\u263A');
                 showActions();
-            }
-            if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
+                break;
+            } else if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
                 System.out.println("Not correct User ID or PIN");
                 quit();
             }
         }
-        AccountHolder.Account account=new AccountHolder().new Account(myID,myPIN);
-
     }
 
     public AccountHolder.Account getCurrentAccount() {
@@ -58,8 +57,15 @@ public class BankTransaction implements Transactions {
      * for the user to see his/her transaction history done with the ATM
      */
     @Override
-    public Map<Date, String> seeTransactionHistory() {
-        return currentAccount.getTransactionHistory();
+    public void seeTransactionHistory() {
+        if (currentAccount.getTransactionHistory().isEmpty()) {
+            System.out.println("No history");
+        }
+        Iterator<Map.Entry<Date, String>> iterator = currentAccount.getTransactionHistory().entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Date, String> me2 = (Map.Entry<Date, String>) iterator.next();
+            System.out.println("On " + me2.getKey() + " - " + me2.getValue());
+        }
     }
 
     /**
@@ -75,7 +81,7 @@ public class BankTransaction implements Transactions {
             throw new IllegalArgumentException("Not enough amount in your account!");
         } else {
             currentAccount.setAmount(currentAccount.getAmount() - amountToTake);
-            currentAccount.getTransactionHistory().put(date, "Taken " + amountToTake + " amount");
+            currentAccount.getTransactionHistory().put(date, "Taken " + amountToTake + "$");
             return amountToTake;
         }
     }
@@ -93,7 +99,7 @@ public class BankTransaction implements Transactions {
     public boolean transfer(String accountIDToWhichTransferring, int amountToTransfer) {
         Date date = new Date();
         if (currentAccount.getAmount() - 500 < amountToTransfer) {
-            throw new IllegalArgumentException("after transferring it is required in the" +
+            throw new IllegalArgumentException("after transferring, it is required in the" +
                     " card to remain at least 500$");
         } else {
             AccountHolder.Account accountToTransfer = null;
@@ -108,7 +114,7 @@ public class BankTransaction implements Transactions {
                     accountToTransfer.setAmount(accountToTransfer.getAmount() + amountToTransfer);
 
                     currentAccount.getTransactionHistory().put(date, "Transferred " + amountToTransfer +
-                            " to " + accountToTransfer.getUserID());
+                            "$ to " + accountToTransfer.getUserID());
                     return true;
                 }
             }
@@ -124,7 +130,7 @@ public class BankTransaction implements Transactions {
     @Override
     public boolean quit() {
         currentAccount = null;
-        System.out.println("Card is exited from the ATM");
+        System.out.println("Card is exited from the ATM. Thanks for using the service " + '\u263A');
         return true;
     }
 

@@ -88,7 +88,7 @@ public class AccountHolder {
         /**
          * PIN of the user, which should contain 4 digits
          */
-        private int userPIN;
+        private Integer userPIN;
 
         /**
          * money of the user present in his/her card
@@ -112,7 +112,7 @@ public class AccountHolder {
             return userID;
         }
 
-        public int getUserPIN() {
+        public Integer getUserPIN() {
             return userPIN;
         }
 

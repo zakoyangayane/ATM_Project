@@ -30,6 +30,7 @@ public class ATMInCenterOfCity extends BankTransaction {
         bankTransactionOFFirstUser.seeTransactionHistory();
         bankTransactionOFFirstUser.quit();
 
+        System.out.println("\n\n");
         //enter another card to ATM
         BankTransaction bankTransactionOfSecondUser = new BankTransaction("5496846465416545646",
                 1212);

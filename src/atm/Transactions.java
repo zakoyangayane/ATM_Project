@@ -22,7 +22,7 @@ public interface Transactions {
      *
      * @return the day done the transaction and the action description
      */
-    Map<Date, String> seeTransactionHistory();
+    void seeTransactionHistory();
 
     /**
      * action for taking money on cash from card
