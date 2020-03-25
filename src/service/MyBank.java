@@ -15,7 +15,7 @@ public class MyBank {
     public static void createAccounts() {
         //define a user
         accountHolder1 = new AccountHolder("Gayane", "Zakoyan", "03.05.2000",
-                "123456AAA", null);
+                "123456AAAA", null);
 
         //create and attach account to the account holder
         accountHolder1.setAccount(accountHolder1.new Account("1234564519806980", 1123));
@@ -26,7 +26,7 @@ public class MyBank {
 
         //define one more user
         accountHolder2 = new AccountHolder("Mane", "Zakoyan", "18.09.2006",
-                "789456JJJ", null);
+                "789456JJJJ", null);
 
         //create and attach account to the second accont holder
         accountHolder2.setAccount(accountHolder2.new Account("7598714259803650", 4545));

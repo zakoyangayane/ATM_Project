@@ -25,6 +25,7 @@ public class BankTransaction implements Transactions {
             if (curAccount.getUserID().equals(myID)
                     && curAccount.getUserPIN() == myPIN) {
                 this.currentAccount = curAccount;
+                System.out.println("Card entered successfully! :)");
                 showActions();
             }
             if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
@@ -34,17 +35,21 @@ public class BankTransaction implements Transactions {
         }
     }
 
+    public AccountHolder.Account getCurrentAccount() {
+        return currentAccount;
+    }
+
     /**
      * when the user has entered valid ID and PIN, he can already see and
      * choose what action he wants to complete
      */
     @Override
     public void showActions() {
-        System.out.println("Choose the action: ");
-        System.out.println("See Transaction History");
-        System.out.println("Withdraw");
-        System.out.println("Transfer");
-        System.out.println("Quit");
+        System.out.println("\n-----Choose the action-----");
+        System.out.println("*  See Transaction History");
+        System.out.println("*  Withdraw");
+        System.out.println("*  Transfer");
+        System.out.println("*  Quit\n");
     }
 
     /**
@@ -117,6 +122,7 @@ public class BankTransaction implements Transactions {
     @Override
     public boolean quit() {
         currentAccount = null;
+        System.out.println("Card is exited from the ATM");
         return true;
     }
 
