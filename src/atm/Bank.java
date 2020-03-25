@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Bank class is for creating a certain bank, with its name,
- * users, and ATMs.
+ * users list, and ATMs.
  *
  * @author Zakoyan Gayane
  * @since 25.03.2020

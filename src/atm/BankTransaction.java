@@ -21,15 +21,26 @@ public class BankTransaction implements Transactions {
     private AccountHolder.Account currentAccount;
 
     public BankTransaction(String myID, Integer myPIN) {
+
+        /*
+          go through all banks accounts and see whether there exists such account with
+          the inputted ID and PIN, if there exists then the cars is successfully entered
+          to the ATM, otherwise, it tells that either the ID or PIN is invalid.
+         */
         for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
             AccountHolder.Account curAccount = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
+
+            /*if found such account, then continue with it, and stop the searching*/
             if (curAccount.getUserID().equals(myID)
                     && curAccount.getUserPIN().equals(myPIN)) {
                 this.currentAccount = curAccount;
                 System.out.println("Card entered successfully! " + '\u263A');
                 showActions();
                 break;
-            } else if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
+            }
+
+            /*if not found the account than quit the card from the ATM*/
+            else if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
                 System.out.println("Not correct User ID or PIN");
                 quit();
             }
@@ -103,14 +114,18 @@ public class BankTransaction implements Transactions {
                     " card to remain at least 500$");
         } else {
             AccountHolder.Account accountToTransfer = null;
+
+            /*check whether the account to which the user wants to transfer money,
+              exists in the bank
+             */
             for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
                 accountToTransfer = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
                 if (accountToTransfer.getUserID().equals(accountIDToWhichTransferring)) {
 
-                    //removing the amount from the current account
+                    /*removing the amount from the current account*/
                     currentAccount.setAmount(currentAccount.getAmount() - amountToTransfer);
 
-                    //adding the amount which is being transferred to another user
+                    /*adding the amount which is being transferred to another user*/
                     accountToTransfer.setAmount(accountToTransfer.getAmount() + amountToTransfer);
 
                     currentAccount.getTransactionHistory().put(date, "Transferred " + amountToTransfer +

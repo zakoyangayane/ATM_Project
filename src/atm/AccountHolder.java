@@ -10,6 +10,9 @@ import java.util.Objects;
  * He/She should have given his/her full name, birthday, passport numbers and his/her account
  * present in the bank.
  * When an Account Holder is created he/she is added to the list of users of the Bank.
+ * Having created an account holder, a user can already have a chance to create his/her
+ * account of card in Bank, which is done using the Account class, that is an inner class
+ * of AccountHolder.
  *
  * @author Zakoyan Gayane
  * @since 25.03.2020
@@ -70,7 +73,7 @@ public class AccountHolder {
     }
 
     /**
-     * Account class is every user of the card of the current bank,
+     * Account class is every user's card of the current bank,
      * and the user has his/her ID, PIN and amount present in the card.
      * This is an inner class of AccountHolder, meaning it can't be made for
      * a user, without having created their Account Holder in Bank.

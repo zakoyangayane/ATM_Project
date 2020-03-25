@@ -1,8 +1,5 @@
 package atm;
 
-import java.util.Date;
-import java.util.Map;
-
 /**
  * functions that an ordinary ATM should have by implementing this interface
  *
