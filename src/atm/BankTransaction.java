@@ -17,9 +17,9 @@ public class BankTransaction implements Transactions {
     /**
      * account which has been entered to the ATM
      */
-    private Account currentAccount;
+    private AccountHolder.Account currentAccount;
 
-    public BankTransaction(Account account) {
+    public BankTransaction(AccountHolder.Account account) {
         this.currentAccount = account;
     }
 
@@ -51,27 +51,34 @@ public class BankTransaction implements Transactions {
      * for transferring a certain amount to another user's account,
      * after transferring it is required that in the card should remain at least 500$
      *
-     * @param accountToWhichTransferring to whom he is going to transfer
-     * @param amountToTransfer           of money he is going to transfer
+     * @param accountIDToWhichTransferring to whom he is going to transfer
+     * @param amountToTransfer             of money he is going to transfer
      * @return true if the transaction has been completed successfully,
-     * false otherwise.
+     * false if the userID not found in the bank.
      */
-    public boolean transfer(Account accountToWhichTransferring, int amountToTransfer) {
+    public boolean transfer(String accountIDToWhichTransferring, int amountToTransfer) {
         Date date = new Date();
         if (currentAccount.getAmount() - 500 < amountToTransfer) {
             throw new IllegalArgumentException("after transferring it is required in the" +
                     " card to remain at least 500$");
         } else {
+            AccountHolder.Account accountToTransfer = null;
+            for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
+                accountToTransfer = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
+                if (accountToTransfer.getUserID().equals(accountIDToWhichTransferring)) {
 
-            //removing the amount from the current account
-            currentAccount.setAmount(currentAccount.getAmount() - amountToTransfer);
+                    //removing the amount from the current account
+                    currentAccount.setAmount(currentAccount.getAmount() - amountToTransfer);
 
-            //adding the amount which is being transferred to another user
-            accountToWhichTransferring.setAmount(accountToWhichTransferring.getAmount() + amountToTransfer);
+                    //adding the amount which is being transferred to another user
+                    accountToTransfer.setAmount(accountToTransfer.getAmount() + amountToTransfer);
 
-            currentAccount.getTransactionHistory().put(date, "Transferred " + amountToTransfer +
-                    " to " + accountToWhichTransferring.getUserID());
-            return true;
+                    currentAccount.getTransactionHistory().put(date, "Transferred " + amountToTransfer +
+                            " to " + accountToTransfer.getUserID());
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

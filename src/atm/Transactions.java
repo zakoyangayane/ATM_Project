@@ -29,11 +29,11 @@ public interface Transactions {
     /**
      * an action for transferring an amount of money to other user
      *
-     * @param accountToWhichTransferring the ID of the account holder
-     * @param amountToTransfer           size of transferring money
+     * @param accountIDToWhichTransferring the ID of the account holder
+     * @param amountToTransfer             size of transferring money
      * @return true if the action has been completed successfully
      */
-    boolean transfer(Account accountToWhichTransferring, int amountToTransfer);
+    boolean transfer(String accountIDToWhichTransferring, int amountToTransfer);
 
     /**
      * for closing the account from the ATM, it's needed to quit it
