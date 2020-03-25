@@ -1,14 +1,18 @@
 package atm;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
  * Bank transaction class is used for the actions that the user can do with his/her account.
- * They can see their history of the account, take amount from the card,
+ * This class implements the Transactions interface to have the necessary functions.
+ * The users can see their history of the account, take amount from the card,
  * transfer some money to another user or quit the account from the ATM.
  *
  * @author Zakoyan Gayane
  * @since 25.03.2020
  */
-public class BankTransaction {
+public class BankTransaction implements Transactions {
 
     /**
      * account which has been entered to the ATM
@@ -22,8 +26,8 @@ public class BankTransaction {
     /**
      * for the user to see his/her transaction history done with the ATM
      */
-    public void seeTransactionHistory() {
-        
+    public Map<Date, String> seeTransactionHistory() {
+        return currentAccount.getTransactionHistory();
     }
 
     /**
@@ -33,10 +37,12 @@ public class BankTransaction {
      * @return amount he has taken
      */
     public int withdraw(int amountToTake) {
+        Date date = new Date();
         if (amountToTake > currentAccount.getAmount()) {
             throw new IllegalArgumentException("Not enough amount in your account!");
         } else {
             currentAccount.setAmount(currentAccount.getAmount() - amountToTake);
+            currentAccount.getTransactionHistory().put(date, "Taken " + amountToTake + " amount");
             return amountToTake;
         }
     }
@@ -51,6 +57,7 @@ public class BankTransaction {
      * false otherwise.
      */
     public boolean transfer(Account accountToWhichTransferring, int amountToTransfer) {
+        Date date = new Date();
         if (currentAccount.getAmount() - 500 < amountToTransfer) {
             throw new IllegalArgumentException("after transferring it is required in the" +
                     " card to remain at least 500$");
@@ -61,6 +68,9 @@ public class BankTransaction {
 
             //adding the amount which is being transferred to another user
             accountToWhichTransferring.setAmount(accountToWhichTransferring.getAmount() + amountToTransfer);
+
+            currentAccount.getTransactionHistory().put(date, "Transferred " + amountToTransfer +
+                    " to " + accountToWhichTransferring.getUserID());
             return true;
         }
     }

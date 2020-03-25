@@ -1,5 +1,9 @@
 package atm;
 
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Account class is every user of the card of the current bank,
  * and the user has his/her ID, PIN and amount present in the card.
@@ -23,6 +27,8 @@ public class Account {
      * money of the user present in his/her card
      */
     private int amount;
+
+    private Map<Date, String> transactionHistory = new LinkedHashMap<>();
 
     public Account(String userID, int userPIN) {
         if (userID.length() != 16) {
@@ -49,6 +55,10 @@ public class Account {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Map<Date, String> getTransactionHistory() {
+        return transactionHistory;
     }
 
     @Override
