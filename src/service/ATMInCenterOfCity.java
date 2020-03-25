@@ -1,5 +1,6 @@
 package service;
 
+import atm.Bank;
 import atm.BankTransaction;
 
 public class ATMInCenterOfCity extends BankTransaction {
@@ -10,7 +11,10 @@ public class ATMInCenterOfCity extends BankTransaction {
 
     public static void main(String[] args) {
         MyBank.createAccounts();
-
+        System.out.println("  Accounts in my Bank");
+        System.out.println("-----------------------");
+        System.out.println(Bank.getAllAccountUsersOfTheBank());
+        System.out.println();
         //first user enters card to ATM
         BankTransaction bankTransactionOFFirstUser = new BankTransaction("1234564519806980",
                 1123);

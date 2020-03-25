@@ -33,6 +33,8 @@ public class BankTransaction implements Transactions {
                 quit();
             }
         }
+        AccountHolder.Account account=new AccountHolder().new Account(myID,myPIN);
+
     }
 
     public AccountHolder.Account getCurrentAccount() {

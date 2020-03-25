@@ -6,7 +6,7 @@ import atm.Bank;
 public class MyBank {
 
     //creating a bank
-    Bank myBank = new Bank("Armenia Bank", 15);
+    static Bank myBank = new Bank("Armenia Bank", 15);
 
     //create users
     static AccountHolder accountHolder1;
