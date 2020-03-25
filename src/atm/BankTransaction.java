@@ -17,15 +17,35 @@ public class BankTransaction implements Transactions {
     /**
      * account which has been entered to the ATM
      */
-    private AccountHolder.Account currentAccount;
+    private AccountHolder.Account currentAccount = null;
 
-    public BankTransaction(AccountHolder.Account account) {
-        this.currentAccount = account;
+    public BankTransaction(String myID, int myPIN) {
+        for (int i = 0; i < Bank.getAllAccountUsersOfTheBank().size(); i++) {
+            AccountHolder.Account curAccount = Bank.getAllAccountUsersOfTheBank().get(i).getAccount();
+            if (curAccount.getUserID().equals(myID)
+                    && curAccount.getUserPIN() == myPIN) {
+                this.currentAccount = curAccount;
+            }
+            if (i == Bank.getAllAccountUsersOfTheBank().size() - 1 && (!curAccount.equals(currentAccount))) {
+                System.out.println("Not correct User ID or PIN");
+                quit();
+            }
+        }
+    }
+
+    @Override
+    public void showActions() {
+        System.out.println("Choose the action: ");
+        System.out.println("See Transaction History");
+        System.out.println("Withdraw");
+        System.out.println("Transfer");
+        System.out.println("Quit");
     }
 
     /**
      * for the user to see his/her transaction history done with the ATM
      */
+    @Override
     public Map<Date, String> seeTransactionHistory() {
         return currentAccount.getTransactionHistory();
     }
@@ -36,6 +56,7 @@ public class BankTransaction implements Transactions {
      * @param amountToTake he wants to take
      * @return amount he has taken
      */
+    @Override
     public int withdraw(int amountToTake) {
         Date date = new Date();
         if (amountToTake > currentAccount.getAmount()) {
@@ -56,6 +77,7 @@ public class BankTransaction implements Transactions {
      * @return true if the transaction has been completed successfully,
      * false if the userID not found in the bank.
      */
+    @Override
     public boolean transfer(String accountIDToWhichTransferring, int amountToTransfer) {
         Date date = new Date();
         if (currentAccount.getAmount() - 500 < amountToTransfer) {
@@ -87,6 +109,7 @@ public class BankTransaction implements Transactions {
      *
      * @return true when the current account has been successfully closed from the ATM
      */
+    @Override
     public boolean quit() {
         currentAccount = null;
         return true;

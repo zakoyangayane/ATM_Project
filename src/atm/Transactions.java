@@ -12,6 +12,12 @@ import java.util.Map;
 public interface Transactions {
 
     /**
+     * when card entered to the ATM and recognized it, then it must show what actions
+     * can be done by that ATM
+     */
+    void showActions();
+
+    /**
      * transactions history of a current user
      *
      * @return the day done the transaction and the action description
